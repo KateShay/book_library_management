@@ -17,6 +17,9 @@
                 <button class="uk-button uk-button-primary" type="submit">Применить</button>
                 <a href="{% url 'index' %}" class="uk-button uk-button-default">Сброс</a>
             </div>
+            <div class = "uk-wight-1-3@s">
+                <a href="create/{{book.id}}">Добавить</a>
+            </div>
         </form>
 
         <table class="uk-table uk-table-striped uk-table-hover">
@@ -35,6 +38,7 @@
                     <td>{{book.author}}</td>
                     <td>{{book.genre}}</td>
                     <td>{{book.isbn}}</td>
+                    <td><a href="edit/{{book.id}}">Изменить</a> | <a href="delete/{{book.id}}">Удалить</a></td>
                 </tr>
                 {% empty %}
                 <tr>
