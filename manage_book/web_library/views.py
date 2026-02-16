@@ -1,4 +1,4 @@
-import Q
+
 from django.shortcuts import render
 from .models import Book
 from django.db.models import Q
