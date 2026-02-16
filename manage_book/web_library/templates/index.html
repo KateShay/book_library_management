@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Менеджер книг</title>
+</head>
+<body>
+    <div class = "uk-container uk-margin-top">
+        <h1>Управление библиотекой книг</h1>
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Жанр</th>
+                    <th>ISBN</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <th>{{book.title}}</th>
+                    <th>{{book.author}}</th>
+                    <th>{{book.genre}}</th>
+                    <th>{{book.isbn}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>>
+</body>
+</html>
