@@ -14,8 +14,21 @@
                 </label>
             </div>
             <div class = "uk-wight-1-3@s">
+                <label for="genre">Жанры:</label>
+                <select id="genre" name="genre" class="form-control">
+                     <option value="">Все жанры</option>
+                    {% for type in genres %}
+                    <option value="{{ type.id }}" {% if selected_genre == type.id %}selected{% endif %}>
+                    {{ type.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class = "uk-wight-1-3@s">
                 <button class="uk-button uk-button-primary" type="submit">Применить</button>
+                {% if search_book or genre_filter %}
                 <a href="{% url 'index' %}" class="uk-button uk-button-default">Сброс</a>
+                {% endif %}
             </div>
             <div class = "uk-wight-1-3@s">
                 <a href="create/{{book.id}}">Добавить</a>

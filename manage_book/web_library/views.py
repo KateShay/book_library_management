@@ -1,10 +1,11 @@
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render
-from .models import Book
+from .models import Book, Genre
 from django.db.models import Q
 
 def index (request):
     books = Book.objects.all()
+    genres =Genre.objects.all()
 
     search_books = request.GET.get('search', '')
     if search_books:
@@ -13,9 +14,15 @@ def index (request):
             Q(author__icontains=search_books)
         )
 
+    genre_filter = request.GET.get('genre', '')
+    if genre_filter:
+        books = books.filter(genre_fk_id=genre_filter)
+
     return render(request, 'index.html', {
         'books': books,
-        'search_books': search_books})
+        'genre': genres,
+        'search_books': search_books,
+        'genre_filter': genre_filter})
 
 def create(request):
     try:
@@ -24,7 +31,7 @@ def create(request):
             book = Book()
             book.title = request.POST.get('title')
             book.author = request.POST.get('author')
-            book.genre = request.POST.get('genre')
+            book.genre = request.POST.get('genre_fk_id')
             book.isbn = request.POST.get('isbn')
             book.save()
             return HttpResponseRedirect('/')
@@ -39,7 +46,7 @@ def edit(request, id):
         if request.method == 'POST':
             book.title = request.POST.get('title')
             book.author = request.POST.get('author')
-            book.genre = request.POST.get('genre')
+            book.genre = request.POST.get('genre_fk_id')
             book.isbn = request.POST.get('isbn')
             book.save()
             return HttpResponseRedirect('/')
