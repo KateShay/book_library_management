@@ -16,11 +16,11 @@ def index (request):
 
     genre_filter = request.GET.get('genre', '')
     if genre_filter:
-        books = books.filter(genre_fk_id=genre_filter)
+        books= books.filter(genre_id=genre_filter)
 
     return render(request, 'index.html', {
         'books': books,
-        'genre': genres,
+        'genres': genres,
         'search_books': search_books,
         'genre_filter': genre_filter})
 
@@ -31,7 +31,7 @@ def create(request):
             book = Book()
             book.title = request.POST.get('title')
             book.author = request.POST.get('author')
-            book.genre = request.POST.get('genre_fk_id')
+            book.genre = request.POST.get('genre')
             book.isbn = request.POST.get('isbn')
             book.save()
             return HttpResponseRedirect('/')
@@ -46,7 +46,7 @@ def edit(request, id):
         if request.method == 'POST':
             book.title = request.POST.get('title')
             book.author = request.POST.get('author')
-            book.genre = request.POST.get('genre_fk_id')
+            book.genre = request.POST.get('genre')
             book.isbn = request.POST.get('isbn')
             book.save()
             return HttpResponseRedirect('/')
