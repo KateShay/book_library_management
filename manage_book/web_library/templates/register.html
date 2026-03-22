@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Вход в библиотеку</title>
+    <title>Регистрация в библиотеке</title>
     <link href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" rel="stylesheet">
     <style>
         body {
@@ -13,30 +13,30 @@
             justify-content: center;
         }
 
-        .login-container {
+        .register-container {
             max-width: 400px;
             width: 100%;
             margin: 20px;
         }
 
-        .login-card {
+        .register-card {
             background: white;
             border-radius: 10px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             padding: 2rem;
         }
 
-        .login-header {
+        .register-header {
             text-align: center;
             margin-bottom: 2rem;
         }
 
-        .login-header h1 {
+        .register-header h1 {
             color: #ffba0a;
             margin-bottom: 0.5rem;
         }
 
-        .btn-login {
+        .btn-register {
             background: #7fff00;
             color: #000;
             width: 100%;
@@ -45,20 +45,14 @@
             border: none;
         }
 
-        .btn-login:hover {
+        .btn-register:hover {
             background: #6ee600;
             color: #000;
         }
 
-        .register-link {
+        .login-link {
             text-align: center;
             margin-top: 1rem;
-        }
-
-        .alert-error {
-            background: #ed7155;
-            color: #fff;
-            border: none;
         }
 
         .uk-input:focus {
@@ -67,19 +61,12 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-header">
-                <h1>📚 Библиотека</h1>
-                <p>Войдите в свою учетную запись</p>
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-header">
+                <h1>Регистрация</h1>
+                <p>Создайте новую учетную запись</p>
             </div>
-
-            {% if err %}
-                <div class="uk-alert alert-error" uk-alert>
-                    <a href="#" class="uk-alert-close" uk-close></a>
-                    <p>{{ err }}</p>
-                </div>
-            {% endif %}
 
             {% if messages %}
                 {% for message in messages %}
@@ -100,17 +87,29 @@
                 </div>
                 <div class="uk-margin">
                     <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                        <input class="uk-input" type="email" name="email" placeholder="Email (необязательно)">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
                         <span class="uk-form-icon" uk-icon="icon: lock"></span>
                         <input class="uk-input" type="password" name="password" placeholder="Пароль" required>
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <button class="uk-button btn-login" type="submit">Войти</button>
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input class="uk-input" type="password" name="password2" placeholder="Подтверждение пароля" required>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button btn-register" type="submit">Зарегистрироваться</button>
                 </div>
             </form>
 
-            <div class="register-link">
-                <p>Нет аккаунта? <a href="{% url 'register' %}" style="color: #ffba0a;">Зарегистрироваться</a></p>
+            <div class="login-link">
+                <p>Уже есть аккаунт? <a href="{% url 'login' %}" style="color: #ffba0a;">Войти</a></p>
             </div>
         </div>
     </div>

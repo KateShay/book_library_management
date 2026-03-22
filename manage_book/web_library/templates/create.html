@@ -2,30 +2,91 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Добавление</title>
+    <title>Добавление книги</title>
+    <link href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffba0a 0%, #ffd966 100%);
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ffba0a;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .btn-save {
+            background: #7fff00;
+            color: #000;
+        }
+
+        .btn-save:hover {
+            background: #6ee600;
+            color: #000;
+        }
+
+        .btn-cancel {
+            background: #ed7155;
+            color: #fff;
+        }
+
+        .btn-cancel:hover {
+            background: #e55a3a;
+            color: #fff;
+        }
+
+        .uk-input:focus, .uk-select:focus {
+            border-color: #ffba0a;
+        }
+    </style>
 </head>
 <body>
-    <h1>Добавление</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <p>
-            <label>Название</label><br>
-            <input type="text" name="title" value="{{book.title}}" />
-        </p>
-        <p>
-            <label>Автор</label><br>
-            <input type="text" name="author" value="{{book.author}}" />
-        </p>
-        <p>
-            <label>Жанр</label><br>
-            <input type="text" name="genre" value="{{book.genre}}" />
-        </p>
-        <p>
-            <label>ISBN</label><br>
-            <input type="text" name="isbn" value="{{book.isbn}}" />
-        </p>
-        <input type="submit" value="Сохранить">
-        <a href="{% url 'index' %}" class="uk-button uk-button-default">Сброс</a>
-    </form>
+    <div class="uk-container">
+        <div class="book-card">
+            <h1>Добавление новой книги</h1>
+            <form method="post" class="uk-form-stacked">
+                {% csrf_token %}
+                <div class="uk-margin">
+                    <label class="uk-form-label">Название книги *</label>
+                    <input class="uk-input" type="text" name="title" placeholder="Введите название" required>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Автор *</label>
+                    <input class="uk-input" type="text" name="author" placeholder="Введите автора" required>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">Жанр *</label>
+                    <select class="uk-select" name="genre" required>
+                        <option value="">Выберите жанр</option>
+                        {% for genre in genres %}
+                            <option value="{{ genre.id }}">{{ genre.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">ISBN</label>
+                    <input class="uk-input" type="text" name="isbn" placeholder="ISBN (необязательно)">
+                </div>
+                <div class="uk-margin uk-flex uk-flex-between">
+                    <button class="uk-button btn-save" type="submit">Сохранить</button>
+                    <a href="/" class="uk-button btn-cancel">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 </body>
 </html>
